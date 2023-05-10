@@ -6,7 +6,7 @@ import { ref, reactive, nextTick } from "vue";
 import { GDrawerPanel } from "gtm-ui";
 import SelectIcon from "./select-icon.vue";
 import { ElMessage, type FormInstance, type FormRules } from "element-plus";
-import { postSysMenuSave, postSysMenuUpdate } from "@/api/operation";
+import { postSysMenuSave, postSysMenuUpdate } from "@/api/data-accessss";
 
 // 模态框配置
 const visible = ref(false);

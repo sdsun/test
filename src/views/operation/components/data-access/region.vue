@@ -52,7 +52,7 @@
 import { ref, watch } from "vue";
 import { ElTree, ElMessage } from "element-plus";
 import DataPeemissionLayout from "./data-peemission-layout.vue";
-import { getRegion } from "@/api/operation";
+import { getRegion } from "@/api/data-accessss";
 
 const filterText = ref("");
 const treeData = ref([]);

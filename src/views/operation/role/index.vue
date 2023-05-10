@@ -3,8 +3,8 @@ import { reactive, ref, onMounted } from "vue";
 import { GTable, GPanelTable } from "gtm-ui";
 import { ElMessage } from "element-plus";
 import { exportFile } from "@/utils/file";
-import { getSysRole, exportRole } from "@/api/operation";
-import { putSysRoleUpdate } from "@/api/operation";
+import { getSysRole, exportRole } from "@/api/data-accessss";
+import { putSysRoleUpdate } from "@/api/data-accessss";
 import CreateRole from "./components/create-role.vue";
 // 子组件实例
 const createRoleRef = ref<InstanceType<typeof CreateRole>>();

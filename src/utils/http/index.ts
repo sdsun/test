@@ -76,39 +76,39 @@ class PureHttp {
         return whiteList.some(v => config.url.indexOf(v) > -1)
           ? config
           : new Promise(resolve => {
-              config.headers["Authorization"] = formatToken(
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSBzZGppY3RlYyIsInVzZXJfaW5mbyI6eyJpZCI6MTY1MTE3NjA2MjMwMDMxMTU1MywiYXZhdGFyIjpudWxsLCJsYW5ndWFnZUNvZGUiOm51bGwsInRlbmFudElkIjpudWxsLCJ1c2VybmFtZSI6IjIxMDI0MDk3IiwiZnVsbE5hbWUiOm51bGwsInBhc3N3b3JkIjpudWxsLCJlbmFibGVkIjp0cnVlLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiMSJ9LHsiYXV0aG9yaXR5IjoiMiJ9XSwiYnVpbHRJbiI6ZmFsc2UsInRpbWVab25lIjpudWxsLCJjb3VudHJ5SWRzIjpudWxsLCJjb3VudHJ5Q29kZXMiOm51bGwsInNhbGVPcmdJZHMiOm51bGwsInNhbGVPcmdDb2RlcyI6bnVsbCwiYWNjb3VudCI6IiIsImFjY291bnRJZCI6IiIsImFjY291bnROYW1lIjoiIiwiaWRlbnRpdGllcyI6bnVsbCwiZW1haWwiOm51bGwsImlkZW50aXRpZU5hbWVzIjpudWxsLCJwaG9uZSI6bnVsbCwidXNlclN0YXR1cyI6bnVsbCwiaWRUeXBlIjoiaWFtIiwiY291bnRyeU5hbWVzIjpudWxsLCJzYWxlT3JnTmFtZXMiOm51bGx9LCJ1c2VyX25hbWUiOiIyMTAyNDA5NyIsInNjb3BlIjpbInNlcnZlciJdLCJhY3RpdmUiOnRydWUsImV4cCI6MTY4MzU1MzgyOCwiYXV0aG9yaXRpZXMiOlsiMSIsIjIiXSwianRpIjoiNzhlOWUwYjktYWMwNy00YTAxLWI5NWEtYmNmOTY1YTNjMzliIiwiY2xpZW50X2lkIjoiYXBwIn0.ismlK-R9eVyaUrtsONzBQxBTyoWmVgjPd1SyTiR8hE0"
-              );
+            config.headers["Authorization"] = formatToken(
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJsaWNlbnNlIjoibWFkZSBieSBzZGppY3RlYyIsInVzZXJfaW5mbyI6eyJpZCI6MTY1MTE3NjA2MjMwMDMxMTU1MywiYXZhdGFyIjpudWxsLCJsYW5ndWFnZUNvZGUiOm51bGwsInRlbmFudElkIjpudWxsLCJ1c2VybmFtZSI6IjIxMDI0MDk3IiwiZnVsbE5hbWUiOm51bGwsInBhc3N3b3JkIjpudWxsLCJlbmFibGVkIjp0cnVlLCJhY2NvdW50Tm9uRXhwaXJlZCI6dHJ1ZSwiY3JlZGVudGlhbHNOb25FeHBpcmVkIjp0cnVlLCJhY2NvdW50Tm9uTG9ja2VkIjp0cnVlLCJhdXRob3JpdGllcyI6W3siYXV0aG9yaXR5IjoiMSJ9LHsiYXV0aG9yaXR5IjoiMiJ9XSwiYnVpbHRJbiI6ZmFsc2UsInRpbWVab25lIjpudWxsLCJjb3VudHJ5SWRzIjpudWxsLCJjb3VudHJ5Q29kZXMiOm51bGwsInNhbGVPcmdJZHMiOm51bGwsInNhbGVPcmdDb2RlcyI6bnVsbCwiYWNjb3VudCI6IiIsImFjY291bnRJZCI6IiIsImFjY291bnROYW1lIjoiIiwiaWRlbnRpdGllcyI6bnVsbCwiZW1haWwiOm51bGwsImlkZW50aXRpZU5hbWVzIjpudWxsLCJwaG9uZSI6bnVsbCwidXNlclN0YXR1cyI6bnVsbCwiaWRUeXBlIjoiaWFtIiwiY291bnRyeU5hbWVzIjpudWxsLCJzYWxlT3JnTmFtZXMiOm51bGx9LCJ1c2VyX25hbWUiOiIyMTAyNDA5NyIsInNjb3BlIjpbInNlcnZlciJdLCJhY3RpdmUiOnRydWUsImV4cCI6MTY4MzU1MzgyOCwiYXV0aG9yaXRpZXMiOlsiMSIsIjIiXSwianRpIjoiNzhlOWUwYjktYWMwNy00YTAxLWI5NWEtYmNmOTY1YTNjMzliIiwiY2xpZW50X2lkIjoiYXBwIn0.ismlK-R9eVyaUrtsONzBQxBTyoWmVgjPd1SyTiR8hE0"
+            );
+            resolve(config);
+            const data = getToken();
+            if (data) {
+              // const now = new Date().getTime();
+              // const expired = parseInt(data.expires) - now <= 0;
+              // if (expired) {
+              //   if (!PureHttp.isRefreshing) {
+              //     PureHttp.isRefreshing = true;
+              //     // token过期刷新
+              //     useUserStoreHook()
+              //       .handRefreshToken({ refreshToken: data.refreshToken })
+              //       .then(res => {
+              //         const token = res.data.accessToken;
+              //         config.headers["Authorization"] = formatToken(token);
+              //         PureHttp.requests.forEach(cb => cb(token));
+              //         PureHttp.requests = [];
+              //       })
+              //       .finally(() => {
+              //         PureHttp.isRefreshing = false;
+              //       });
+              //   }
+              //   resolve(PureHttp.retryOriginalRequest(config));
+              // } else {
+              config.headers["Authorization"] = formatToken(data.accessToken);
               resolve(config);
-              const data = getToken();
-              if (data) {
-                // const now = new Date().getTime();
-                // const expired = parseInt(data.expires) - now <= 0;
-                // if (expired) {
-                //   if (!PureHttp.isRefreshing) {
-                //     PureHttp.isRefreshing = true;
-                //     // token过期刷新
-                //     useUserStoreHook()
-                //       .handRefreshToken({ refreshToken: data.refreshToken })
-                //       .then(res => {
-                //         const token = res.data.accessToken;
-                //         config.headers["Authorization"] = formatToken(token);
-                //         PureHttp.requests.forEach(cb => cb(token));
-                //         PureHttp.requests = [];
-                //       })
-                //       .finally(() => {
-                //         PureHttp.isRefreshing = false;
-                //       });
-                //   }
-                //   resolve(PureHttp.retryOriginalRequest(config));
-                // } else {
-                config.headers["Authorization"] = formatToken(data.accessToken);
-                resolve(config);
-                // }
-              } else {
-                resolve(config);
-              }
-            });
+              // }
+            } else {
+              resolve(config);
+            }
+          });
       },
       error => {
         return Promise.reject(error);

@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, h } from "vue";
 import { GTable, GPanelTable } from "gtm-ui";
-import { getSysMenu } from "@/api/operation";
+import { getSysMenu } from "@/api/data-accessss";
 import CreateMenu from "./components/create-menu.vue";
 // 子组件实例
 const createMenuRef = ref<InstanceType<typeof CreateMenu>>();

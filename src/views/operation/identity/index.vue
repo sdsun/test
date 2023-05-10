@@ -7,7 +7,7 @@ import {
   OperationRecord,
   AssignPer
 } from "./components";
-import { getSysIdentity } from "@/api/operation";
+import { getSysIdentity } from "@/api/data-accessss";
 // 子组件实例
 const createIdentityRef = ref<InstanceType<typeof CreateIdentity>>();
 const treeConfigRef = ref<InstanceType<typeof TreeConfig>>();

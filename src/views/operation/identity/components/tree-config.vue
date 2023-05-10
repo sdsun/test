@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { GTable, GDrawerPanel } from "gtm-ui";
 import AddUser from "./add-user.vue";
-import { getSysIdentityTree } from "@/api/operation";
+import { getSysIdentityTree } from "@/api/data-accessss";
 // 子组件实例
 const addUserRef = ref<InstanceType<typeof AddUser>>();
 // 添加用户开关

@@ -19,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { getSysMenu } from "@/api/operation";
+import { getSysMenu } from "@/api/data-accessss.js";
 import { ref } from "vue";
 
 const handleNodeClick = data => {
