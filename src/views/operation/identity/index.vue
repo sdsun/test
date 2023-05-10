@@ -1,14 +1,27 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, reactive, onMounted } from "vue";
 import { GTable, GPanelTable } from "gtm-ui";
-import { CreateIdentity, TreeConfig, OperationRecord } from "./components";
+import {
+  CreateIdentity,
+  TreeConfig,
+  OperationRecord,
+  AssignPer
+} from "./components";
+import { getSysIdentity } from "@/api/operation";
 // 子组件实例
 const createIdentityRef = ref<InstanceType<typeof CreateIdentity>>();
 const treeConfigRef = ref<InstanceType<typeof TreeConfig>>();
 const operationRecordRef = ref<InstanceType<typeof OperationRecord>>();
+const assignPerRef = ref<InstanceType<typeof AssignPer>>();
 
-// 表格状态
+// 表格配置
 const loading = ref(true);
+const pagination = reactive({
+  pageSize: 10,
+  currentPage: 1,
+  background: true,
+  total: 0
+});
 // 表格列配置
 const columns: any = [
   {
@@ -19,7 +32,13 @@ const columns: any = [
   },
   {
     label: "Identity Name",
-    prop: "name",
+    prop: "identityName",
+    width: "220px",
+    show: true
+  },
+  {
+    label: "Identity Code",
+    prop: "identityCode",
     width: "220px",
     show: true
   },
@@ -37,26 +56,49 @@ const columns: any = [
   },
   {
     label: "Short Name",
-    prop: "address",
+    prop: "shortName",
     width: "auto",
     minWidth: "240px",
     show: true
   },
   {
     label: "Operation",
-    prop: "address",
+    prop: "action",
     width: "240px",
     show: true,
     fixed: "right"
   }
 ];
 // 表格数据
-const tableData = [];
+const tableData = ref([]);
 // 获取表单数据方法
-const handleGetTableData = () => {};
+const handleGetTableData = () => {
+  loading.value = true;
+  getSysIdentity({
+    current: pagination.currentPage,
+    size: pagination.pageSize,
+    orgCode: "6560"
+  })
+    .then(res => {
+      loading.value = false;
+      const { code, data } = res;
+      if (code === 0) {
+        tableData.value = data.records;
+        pagination.total = data.total;
+      }
+    })
+    .catch(() => {
+      loading.value = false;
+    });
+};
+const handlePageSizeChange = () => {
+  handleGetTableData();
+};
+const handleCurrentChange = () => {
+  handleGetTableData();
+};
 onMounted(() => {
   handleGetTableData();
-  loading.value = false;
 });
 </script>
 <template>
@@ -71,8 +113,11 @@ onMounted(() => {
           :loading="loading"
           :data="tableData"
           :columns="columns"
-          :pagination="null"
+          :pagination="pagination"
           :select-info-append="null"
+          :config-table="{ setting: false, font: false, fullscreen: false }"
+          @page-size-change="handlePageSizeChange"
+          @page-current-change="handleCurrentChange"
         >
           <template #tableLeft>
             <el-button
@@ -97,5 +142,7 @@ onMounted(() => {
     <TreeConfig ref="treeConfigRef" />
     <!-- 操作记录 -->
     <OperationRecord ref="operationRecordRef" />
+    <!-- 岗位权限 -->
+    <AssignPer ref="assignPerRef" />
   </div>
 </template>

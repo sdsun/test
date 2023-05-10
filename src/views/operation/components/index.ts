@@ -1,3 +1,4 @@
-import DataPermission from "./data-permission/index.vue";
+import OperationAccess from "./operation-access/index.vue";
+import DataAccess from "./data-access/index.vue";
 
-export { DataPermission };
+export { DataAccess, OperationAccess };

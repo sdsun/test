@@ -1,18 +1,5 @@
 <template>
   <DataPeemissionLayout>
-    <template #search>
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="Region">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item label="Region code">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">Search</el-button>
-        </el-form-item>
-      </el-form>
-    </template>
     <template #left>
       <GTable
         row-key="id"
@@ -25,7 +12,7 @@
         :columns="columns"
         :pagination="null"
         :select-info-append="null"
-        size="small"
+        :config-table="{ setting: false, font: false, fullscreen: false }"
       />
     </template>
     <template #right>
@@ -40,7 +27,7 @@
         :columns="columns"
         :pagination="null"
         :select-info-append="null"
-        size="small"
+        :config-table="{ setting: false, font: false, fullscreen: false }"
       />
     </template>
   </DataPeemissionLayout>

@@ -1,26 +1,11 @@
 <template>
   <div class="data-per p-4">
-    <!-- 筛选 -->
-    <div class="data-per__filter">
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="Region">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item label="Region code">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">Search</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
     <!-- 内容 -->
     <div>
       <el-row :gutter="24">
         <el-col :span="12">
-          <div class="flex justify-between mb-2">
-            <span>Filtered Region List</span>
-            <span>Select All 58 Items</span>
+          <div class="mb-2">
+            <el-input v-model="filterText" placeholder="Filter keyword" />
           </div>
           <div>
             <GTable
@@ -34,24 +19,29 @@
               :columns="columns"
               :pagination="null"
               :select-info-append="null"
-              size="small"
+              :config-table="{ setting: false, font: false, fullscreen: false }"
             />
           </div>
         </el-col>
         <el-col :span="12">
-          <GTable
-            row-key="id"
-            border
-            checkable
-            showOverflowTooltip
-            headerAlign="left"
-            :loading="loading"
-            :data="tableData"
-            :columns="columns"
-            :pagination="null"
-            :select-info-append="null"
-            size="small"
-          />
+          <div class="mb-2">
+            <el-input v-model="filterText" placeholder="Filter keyword" />
+          </div>
+          <div>
+            <GTable
+              row-key="id"
+              border
+              checkable
+              showOverflowTooltip
+              headerAlign="left"
+              :loading="loading"
+              :data="tableData"
+              :columns="columns"
+              :pagination="null"
+              :select-info-append="null"
+              :config-table="{ setting: false, font: false, fullscreen: false }"
+            />
+          </div>
         </el-col>
       </el-row>
     </div>
@@ -65,25 +55,19 @@ const loading = ref(true);
 // 表格列配置
 const columns: any = [
   {
-    label: "Shop Code",
+    label: "Customer Code",
     prop: "date",
     width: "180px",
     show: true
   },
   {
-    label: "Shop Name",
+    label: "Customer Name",
     prop: "name",
     width: "200px",
     show: true
   },
   {
-    label: "Customer Code",
-    prop: "address",
-    width: "160px",
-    show: true
-  },
-  {
-    label: "Customer Name",
+    label: "Account Type",
     prop: "address",
     width: "160px",
     show: true

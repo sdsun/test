@@ -1,22 +1,8 @@
 <template>
   <DataPeemissionLayout>
-    <template #search>
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="Region">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item label="Region code">
-          <el-input placeholder="please input" v-model="filterText" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">Search</el-button>
-        </el-form-item>
-      </el-form>
-    </template>
     <template #left>
-      {{ leftCount }}
-      {{ rightCount }}
       <!-- 左侧树 -->
+      <el-input />
       <el-tree
         ref="treeRef"
         :data="treeData"
@@ -39,6 +25,7 @@
       </el-tree>
     </template>
     <template #right>
+      <el-input />
       <!-- 右侧树 -->
       <el-tree
         ref="treeRRef"
@@ -66,7 +53,6 @@ import { ref, watch } from "vue";
 import { ElTree, ElMessage } from "element-plus";
 import DataPeemissionLayout from "./data-peemission-layout.vue";
 import { getRegion } from "@/api/operation";
-import { upperCase } from "lodash-es";
 
 const filterText = ref("");
 const treeData = ref([]);

@@ -1,8 +1,4 @@
 <template>
-  <div class="data-permission">
-    <DataPermission />
-  </div>
+  <div></div>
 </template>
-<script lang="ts" setup>
-import { DataPermission } from "../components";
-</script>
+<script lang="ts" setup></script>

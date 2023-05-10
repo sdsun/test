@@ -1,19 +1,5 @@
 <template>
   <div class="data-per p-4">
-    <!-- 筛选 -->
-    <div class="data-per__filter">
-      <el-form :inline="true" class="demo-form-inline">
-        <el-form-item label="Region">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item label="Region code">
-          <el-input placeholder="please input" />
-        </el-form-item>
-        <el-form-item>
-          <el-button type="primary">Search</el-button>
-        </el-form-item>
-      </el-form>
-    </div>
     <!-- 内容 -->
     <div>
       <el-row :gutter="24">
@@ -34,16 +20,7 @@
             :props="defaultProps"
           />
         </el-col>
-        <el-col :span="12">
-          <el-tree
-            :data="data"
-            show-checkbox
-            node-key="id"
-            :default-expanded-keys="[2, 3]"
-            :default-checked-keys="[5]"
-            :props="defaultProps"
-          />
-        </el-col>
+        <el-col :span="12"> </el-col>
       </el-row>
     </div>
   </div>

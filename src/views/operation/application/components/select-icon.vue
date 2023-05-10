@@ -54,24 +54,7 @@ defineExpose({
   handleShow
 });
 // 图标列表
-const list = ref<IconType>([
-  {
-    name: "search",
-    value: "icon-search"
-  },
-  {
-    name: "search",
-    value: "icon-reset"
-  },
-  {
-    name: "search",
-    value: "icon-fullscreen-exit"
-  },
-  {
-    name: "search",
-    value: "icon-fullscreen"
-  }
-]);
+const list = ref<IconType>();
 </script>
 <style lang="scss" scoped>
 .menu-icon {

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, onMounted, h } from "vue";
 import { GTable, GPanelTable } from "gtm-ui";
 import { getSysMenu } from "@/api/operation";
 import CreateMenu from "./components/create-menu.vue";
@@ -11,39 +11,39 @@ const loading = ref(true);
 const columns: any = [
   {
     label: "Menu Name",
-    prop: "date",
+    prop: "name",
     width: "240px",
     show: true
   },
   {
-    label: "Type",
-    prop: "name",
-    width: "220px",
-    show: true
-  },
-  {
-    label: "Sales Org",
-    prop: "address",
-    width: "220px",
+    label: "Code",
+    prop: "code",
+    width: "200px",
     show: true
   },
   {
     label: "Icon",
-    prop: "address",
-    width: "160px",
-    show: true
+    prop: "icon",
+    width: "60px",
+    show: true,
+    cellRenderer(props: any) {
+      return h("i", {
+        class: `iconfont ${props.row.icon}`,
+        style: { fontSize: "20px" }
+      });
+    }
   },
   {
     label: "Rank",
-    prop: "address",
-    width: "160px",
+    prop: "resOrder",
+    width: "80px",
     show: true
   },
   {
     label: "Path",
-    prop: "address",
+    prop: "url",
     width: "auto",
-    minWidth: "300px",
+    minWidth: "360px",
     show: true
   },
   {
@@ -51,26 +51,54 @@ const columns: any = [
     prop: "address",
     width: "240px",
     show: true,
-    fixed: "right"
+    fixed: "right",
+    actions: [
+      {
+        label: "Edit",
+        onClick: (action, scope) => {
+          createMenuRef.value.handleShow(2, scope.row);
+        }
+      },
+      {
+        label: "Detail",
+        onClick: (action, scope) => {
+          createMenuRef.value.handleShow(4, scope.row);
+        }
+      },
+      {
+        label: "Add Submenu",
+        onClick: (action, scope) => {
+          createMenuRef.value.handleShow(3, scope.row);
+        }
+      }
+    ]
   }
 ];
 // 表格数据
-const tableData = [];
+const tableData = ref([]);
 
-const handleGet = () => {
-  getSysMenu({}).then(res => {
-    console.log(res);
-  });
+const handleGetTableData = () => {
+  loading.value = true;
+  getSysMenu()
+    .then(res => {
+      loading.value = false;
+      const { code, data } = res;
+      if (code === 0) {
+        tableData.value = data;
+      }
+    })
+    .catch(() => {
+      loading.value = false;
+    });
 };
 
-handleGet();
-// 新增回调刷新表格
+onMounted(() => {
+  handleGetTableData();
+});
+// 刷新表格
 const handleOk = () => {
-  console.log("refesh table");
+  handleGetTableData();
 };
-setTimeout(() => {
-  loading.value = false;
-}, 1500);
 </script>
 <template>
   <div class="h-full">
@@ -86,11 +114,15 @@ setTimeout(() => {
           :columns="columns"
           :pagination="null"
           :select-info-append="null"
+          :config-table="{ setting: false, font: false, fullscreen: false }"
+          :tree-props="{
+            children: 'sysMenuDtoList'
+          }"
         >
           <template #tableLeft>
             <el-button
               type="primary"
-              @click="createMenuRef.handleShow({ id: null })"
+              @click="createMenuRef.handleShow(1, { id: null })"
             >
               Create
             </el-button>
