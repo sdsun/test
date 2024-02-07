@@ -31,7 +31,7 @@ export const getCustomer = () => {
 export const getShop = () => { 
   http.request("get", api.Shop);
 }
-// 根据组织获取基础数据(产品分类)
+// 根据组织获取基础数据(产品分类111)
 export const getProductCategory = () => { 
   return http.request("get", api.ProductCategory);
 };
