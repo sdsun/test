@@ -44,7 +44,7 @@ export default ({ command, mode }: ConfigEnv): UserConfigExport => {
       proxy: {
         "/api": {
           ws: true,
-          target: "https://cep-dev.haier.net/",
+          target: "",
           changeOrigin: true
         }
       }

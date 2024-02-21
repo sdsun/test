@@ -18,7 +18,7 @@ export const getSysIdentity = () => {
 export const getSysIdentityTree = params => { 
   return http.request<any>("get", api.SysIdentityTree, { params });
 }
-// 新增系统岗位
+// 新增系统岗位-获取
 export const postSysIdentitySave = () => { 
   return http.request("post", api.SysIdentitySave);
 };
